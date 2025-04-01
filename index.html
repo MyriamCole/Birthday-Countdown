@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Countdown to Myriam's Birthday!</title>
-    <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/png" href="images/main logo 2.png">
     <!-- For iOS -->
     <link rel="apple-touch-icon" sizes="180x180" href="images/icons/apple-touch-icon.png">
@@ -27,36 +26,75 @@
         }
         
         .countdown-container {
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 2rem;
-            border-radius: 10px;
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 2.5rem;
+            border-radius: 15px;
             text-align: center;
+            max-width: 600px;
+            box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+            border: 2px solid #ff69b4;
         }
         
         h1 {
-            margin-bottom: 1rem;
+            color: #ff69b4;
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 10px rgba(255, 105, 180, 0.7);
         }
         
         #countdown {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
+            margin: 1.5rem 0;
         }
         
         #countdown span {
+            color: #ff69b4;
             font-weight: bold;
+            font-size: 2rem;
+        }
+        
+        #message h2 {
+            color: #ff69b4;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .love-note {
+            margin-top: 2rem;
+            font-style: italic;
+            color: #ffb6c1;
+            font-size: 1.2rem;
+        }
+        
+        .heart {
+            color: red;
+            font-size: 1.5rem;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
         }
     </style>
 </head>
 <body>
     <div class="countdown-container">
-        <h1>Countdown to Myriam's Birthday!</h1>
+        <h1>Countdown to Myriam's Birthday! <span class="heart">♥</span></h1>
         <div id="countdown">
-            <span id="days"></span> Days 
-            <span id="hours"></span> Hours 
-            <span id="minutes"></span> Minutes 
+            <span id="days"></span> Days<br>
+            <span id="hours"></span> Hours<br>
+            <span id="minutes"></span> Minutes<br>
             <span id="seconds"></span> Seconds
         </div>
         <div id="message" style="display: none;">
             <h2>🎉 Happy Birthday Myriam! 🎉</h2>
+            <p>Wishing you the most amazing day!</p>
+        </div>
+        <div class="love-note">
+            Every second counts when I'm waiting to celebrate you<br>
+            - Your love <span class="heart">♥</span>
         </div>
     </div>
 
@@ -80,11 +118,17 @@
             if (diff <= 0) {
                 document.getElementById("countdown").style.display = "none";
                 document.getElementById("message").style.display = "block";
-                confetti({
-                    particleCount: 100,
-                    spread: 70,
-                    origin: { y: 0.6 }
-                });
+                // Pink confetti celebration
+                for(let i = 0; i < 5; i++) {
+                    setTimeout(() => {
+                        confetti({
+                            particleCount: 150,
+                            spread: 70,
+                            origin: { y: 0.6 },
+                            colors: ['#ff69b4', '#ff1493', '#ffb6c1', '#ffffff']
+                        });
+                    }, i * 300);
+                }
                 return;
             }
             
