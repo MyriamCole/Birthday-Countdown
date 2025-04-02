@@ -239,42 +239,6 @@
         /* Music Player */
         .music-player {
             margin-top: 1.5rem;
-            text-align: center;
-        }
-        
-        .music-player audio {
-            width: 100%;
-            max-width: 300px;
-            background: rgba(255, 105, 180, 0.2);
-            border-radius: 30px;
-            padding: 5px;
-            box-shadow: 0 0 15px rgba(255, 105, 180, 0.7);
-        }
-        
-        .music-player audio::-webkit-media-controls-panel {
-            background: linear-gradient(45deg, #ff69b4, #ff1493);
-            border-radius: 30px;
-        }
-        
-        /* Song Lyrics */
-        .song-lyrics {
-            display: none;
-            margin-top: 1rem;
-            font-style: italic;
-            color: #ffb6c1;
-            font-size: 1.3rem;
-            line-height: 1.8;
-            font-family: 'Dancing Script', cursive;
-        }
-        
-        /* Birthday Message */
-        .birthday-message {
-            display: none;
-            margin-top: 1.5rem;
-            padding: 1rem;
-            background: rgba(255, 105, 180, 0.2);
-            border-radius: 10px;
-            font-size: 1.2rem;
         }
     </style>
 </head>
@@ -294,15 +258,6 @@
             <h2>🎉 Happy Birthday Myriam! 🎉</h2>
             <p>Today is your special day!</p>
             <div class="photo-frame" id="birthdayPhoto"></div>
-            <div class="song-lyrics" id="lyrics">
-                Happy Birthday to you<br>
-                Happy Birthday to you<br>
-                Happy Birthday dear Myriam<br>
-                Happy Birthday to you!
-            </div>
-            <div class="birthday-message">
-                Wishing you a day filled with love, laughter, and all the happiness you bring to others!
-            </div>
         </div>
         
         <div class="btn-container">
@@ -355,7 +310,6 @@
                 <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
                 Your browser does not support the audio element.
             </audio>
-            <button class="toggle-btn" onclick="playSong()" style="margin-top: 1rem;">Play Birthday Song</button>
         </div>
     </div>
 
@@ -380,10 +334,6 @@
             targetDate.setFullYear(targetDate.getFullYear() + 1);
         }
         
-        // Audio element
-        const song = document.getElementById("birthdaySong");
-        song.volume = 0.3;
-
         function updateCountdown() {
             const now = new Date();
             const diff = targetDate - now;
@@ -392,7 +342,6 @@
                 document.getElementById("countdown").style.display = "none";
                 document.getElementById("message").style.display = "block";
                 document.getElementById("birthdayPhoto").style.display = "block";
-                document.getElementById("lyrics").style.display = "block";
                 
                 // Big confetti celebration
                 for(let i = 0; i < 15; i++) {
@@ -407,8 +356,10 @@
                     }, i * 300);
                 }
                 
-                // Attempt to play song on birthday
-                playSong();
+                // Play birthday song
+                const song = document.getElementById("birthdaySong");
+                song.volume = 0.3;
+                song.play();
                 return;
             }
             
@@ -435,21 +386,6 @@
                 });
                 // Show selected section
                 section.style.display = "block";
-            }
-        }
-        
-        // Function to play the song
-        function playSong() {
-            const playPromise = song.play();
-            if (playPromise !== undefined) {
-                playPromise
-                    .then(() => {
-                        console.log("Song is playing!");
-                    })
-                    .catch(error => {
-                        console.log("Error playing song: ", error);
-                        alert("Please click the 'Play Birthday Song' button to start the music due to browser restrictions.");
-                    });
             }
         }
         
