@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Myriam's Special Birthday Countdown</title>
+    <title>Myriam's Birthday Countdown</title>
     <link rel="icon" type="image/png" href="images/main logo 2.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="images/icons/apple-touch-icon.png">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Pacifico&display=swap');
         
@@ -64,6 +63,10 @@
             font-family: 'Dancing Script', cursive;
         }
         
+        #message {
+            display: none;
+        }
+        
         #message h2 {
             color: #ff69b4;
             font-size: 3.5rem;
@@ -95,73 +98,23 @@
             100% { transform: scale(1); }
         }
         
-        /* Fun Facts Section */
-        .fun-facts {
-            display: none;
-            margin-top: 2rem;
-            padding: 1.5rem;
-            background: rgba(255, 182, 193, 0.3);
-            border-radius: 15px;
-            border-left: 5px solid #ff69b4;
-        }
-        
-        .fun-facts h3 {
-            color: #ff69b4;
-            margin-top: 0;
-            font-size: 1.8rem;
-            font-family: 'Pacifico', cursive;
-        }
-        
-        .fun-facts ul {
-            text-align: left;
-            padding-left: 1.5rem;
-            font-size: 1.2rem;
-        }
-        
-        .fun-facts li {
-            margin-bottom: 0.8rem;
-            padding-left: 0.5rem;
-        }
-        
-        /* On This Day Section */
-        .on-this-day {
-            display: none;
-            margin-top: 1.5rem;
-            padding: 1.5rem;
-            background: rgba(255, 105, 180, 0.2);
-            border-radius: 15px;
-            border-right: 5px solid #ffb6c1;
-        }
-        
-        .on-this-day h3 {
-            color: #ffb6c1;
-            font-family: 'Pacifico', cursive;
-        }
-        
-        /* Toggle Buttons */
-        .toggle-btn {
+        /* Play Button */
+        .play-btn {
             background: linear-gradient(45deg, #ff69b4, #ff1493);
             color: white;
             border: none;
             padding: 0.8rem 1.5rem;
             border-radius: 30px;
             font-weight: bold;
-            margin: 0.8rem;
+            margin: 1rem 0;
             cursor: pointer;
             transition: all 0.3s;
             box-shadow: 0 0 15px rgba(255, 105, 180, 0.7);
             font-size: 1.1rem;
         }
         
-        .toggle-btn:hover {
-            transform: scale(1.1) rotate(-5deg);
-            box-shadow: 0 0 20px rgba(255, 105, 180, 0.9);
-        }
-        
-        .btn-container {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
+        .play-btn:hover {
+            transform: scale(1.1);
         }
         
         /* Balloons */
@@ -185,30 +138,6 @@
             0% { transform: translateY(0) rotate(0deg); }
             50% { transform: translateY(-150px) rotate(15deg); }
             100% { transform: translateY(0) rotate(0deg); }
-        }
-        
-        /* Photo Frame */
-        .photo-frame {
-            display: none;
-            margin: 1.5rem auto;
-            width: 200px;
-            height: 200px;
-            border: 5px solid #ff69b4;
-            border-radius: 10px;
-            background-size: cover;
-            background-position: center;
-            box-shadow: 0 0 20px rgba(255, 105, 180, 0.7);
-            animation: pulse 2s infinite;
-        }
-        
-        /* Memory Section */
-        .memory {
-            display: none;
-            background: rgba(255, 182, 193, 0.3);
-            padding: 1rem;
-            border-radius: 10px;
-            margin-top: 1rem;
-            font-style: italic;
         }
         
         /* Close Button */
@@ -236,50 +165,14 @@
             transform: rotate(180deg) scale(1.2);
         }
         
-        /* Music Player */
-        .music-player {
-            margin-top: 1.5rem;
-            display: none; /* Hidden by default, shows on birthday */
-        }
-        
         /* Song Lyrics */
         .song-lyrics {
-            display: none;
             margin-top: 1rem;
             font-style: italic;
             color: #ffb6c1;
             font-size: 1.3rem;
             line-height: 1.8;
             font-family: 'Dancing Script', cursive;
-        }
-        
-        /* Birthday Message */
-        .birthday-message {
-            display: none;
-            margin-top: 1.5rem;
-            padding: 1rem;
-            background: rgba(255, 105, 180, 0.2);
-            border-radius: 10px;
-            font-size: 1.2rem;
-        }
-        
-        /* Play Button */
-        .play-btn {
-            background: linear-gradient(45deg, #ff69b4, #ff1493);
-            color: white;
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 30px;
-            font-weight: bold;
-            margin: 1rem 0;
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 0 15px rgba(255, 105, 180, 0.7);
-            font-size: 1.1rem;
-        }
-        
-        .play-btn:hover {
-            transform: scale(1.1);
         }
     </style>
 </head>
@@ -297,63 +190,14 @@
         
         <div id="message" style="display: none;">
             <h2>🎉 Happy Birthday Myriam! 🎉</h2>
-            <p>Today is your special day!</p>
-            <div class="photo-frame" id="birthdayPhoto"></div>
-            <div class="song-lyrics" id="lyrics">
+            <div class="song-lyrics">
                 Happy Birthday to you<br>
                 Happy Birthday to you<br>
                 Happy Birthday dear Myriam<br>
                 Happy Birthday to you!
             </div>
-            <div class="birthday-message">
-                Wishing you a day filled with love, laughter, and all the happiness you bring to others!
-            </div>
             <button class="play-btn" onclick="playBirthdaySong()">Play Birthday Song ♫</button>
-            <div class="music-player">
-                <audio id="birthdaySong" loop>
-                    <!-- Using a reliable public domain birthday song -->
-                    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-                    Your browser does not support the audio element.
-                </audio>
-            </div>
-        </div>
-        
-        <div class="btn-container">
-            <button class="toggle-btn" onclick="toggleSection('funFacts')">❤️ Fun Facts About You</button>
-            <button class="toggle-btn" onclick="toggleSection('onThisDay')">🎂 On This Day</button>
-            <button class="toggle-btn" onclick="toggleSection('specialMemory')">💖 Our Special Memory</button>
-        </div>
-        
-        <div class="fun-facts" id="funFacts">
-            <h3>Reasons Why You're Amazing</h3>
-            <ul>
-                <li>Your smile lights up my world</li>
-                <li>You have the most beautiful heart</li>
-                <li>Your laugh is my favorite sound</li>
-                <li>You make every day an adventure</li>
-                <li>Your kindness inspires me</li>
-                <li>You're my favorite person to talk to</li>
-                <li>Your strength amazes me</li>
-                <li>You make me want to be better</li>
-            </ul>
-        </div>
-        
-        <div class="on-this-day" id="onThisDay">
-            <h3>On June 29th...</h3>
-            <p>The world became a brighter place when you were born!</p>
-            <div class="photo-frame" style="background-image: url('https://via.placeholder.com/200x200/ff69b4/ffffff?text=Baby+Myriam');"></div>
-            <p>Some famous June 29 birthdays:</p>
-            <ul>
-                <li>1900 - Antoine de Saint-Exupéry (author of The Little Prince)</li>
-                <li>1956 - Pedro Guerrero, baseball legend</li>
-                <li>1994 - The day the universe gave us you!</li>
-            </ul>
-        </div>
-        
-        <div class="memory" id="specialMemory">
-            <h3>My Favorite Memory With You</h3>
-            <p>Remember when we [INSERT SPECIAL MEMORY HERE]? That was the day I knew you were someone incredibly special. The way you [SPECIFIC DETAIL] made my heart skip a beat.</p>
-            <div class="photo-frame" style="background-image: url('https://via.placeholder.com/200x200/ff1493/ffffff?text=Our+Memory');"></div>
+            <audio id="birthdaySong" src="https://assets.mixkit.co/music/preview/mixkit-happy-birthday-to-you-1080.mp3"></audio>
         </div>
         
         <div class="love-note">
@@ -364,7 +208,7 @@
         </div>
     </div>
 
-    <!-- Floating Elements -->
+    <!-- Floating Balloons -->
     <div class="balloon" style="background:#ff69b4; left:5%; top:90%; animation-delay:0s;">♥</div>
     <div class="balloon" style="background:#ff1493; left:15%; top:85%; animation-delay:1s;">M</div>
     <div class="balloon" style="background:#ffb6c1; left:25%; top:95%; animation-delay:2s;">Y</div>
@@ -392,9 +236,6 @@
             if (diff <= 0) {
                 document.getElementById("countdown").style.display = "none";
                 document.getElementById("message").style.display = "block";
-                document.getElementById("birthdayPhoto").style.display = "block";
-                document.getElementById("lyrics").style.display = "block";
-                document.querySelector('.music-player').style.display = 'block';
                 
                 // Big confetti celebration
                 for(let i = 0; i < 15; i++) {
@@ -426,44 +267,9 @@
         function playBirthdaySong() {
             const song = document.getElementById("birthdaySong");
             song.volume = 0.3;
-            song.play().then(() => {
-                document.querySelector('.play-btn').style.display = 'none';
-            }).catch(error => {
-                alert("Please click 'Play Birthday Song' to start the music!");
+            song.play().catch(error => {
+                alert("Please click 'Allow' if browser asks for permission to play audio");
             });
-        }
-        
-        // Toggle sections
-        function toggleSection(sectionId) {
-            const section = document.getElementById(sectionId);
-            if (section.style.display === "block") {
-                section.style.display = "none";
-            } else {
-                // Hide all sections first
-                document.querySelectorAll('.fun-facts, .on-this-day, .memory').forEach(el => {
-                    el.style.display = "none";
-                });
-                // Show selected section
-                section.style.display = "block";
-            }
-        }
-        
-        // Create more floating elements
-        function createFloatingElements() {
-            const colors = ['#ff69b4', '#ff1493', '#ffb6c1', '#ff85a2', '#ff9eb5'];
-            const symbols = ['♥', '★', '♪', 'M', 'Y', 'B', 'D'];
-            
-            for (let i = 0; i < 15; i++) {
-                const element = document.createElement("div");
-                element.className = "balloon";
-                element.style.background = colors[Math.floor(Math.random() * colors.length)];
-                element.style.left = Math.random() * 100 + "%";
-                element.style.top = (Math.random() * 50 + 50) + "%";
-                element.style.animationDelay = Math.random() * 8 + "s";
-                element.style.transform = `scale(${Math.random() * 0.7 + 0.5})`;
-                element.textContent = symbols[Math.floor(Math.random() * symbols.length)];
-                document.body.appendChild(element);
-            }
         }
         
         // Final love message
@@ -506,14 +312,6 @@
         // Initialize
         updateCountdown();
         setInterval(updateCountdown, 1000);
-        createFloatingElements();
-        
-        // Replace placeholder images with actual photos
-        window.onload = function() {
-            // Replace with actual image URLs
-            // document.getElementById("birthdayPhoto").style.backgroundImage = "url('images/myriam-birthday.jpg')";
-            // document.querySelector("#specialMemory .photo-frame").style.backgroundImage = "url('images/our-memory.jpg')";
-        };
     </script>
 </body>
 </html>
