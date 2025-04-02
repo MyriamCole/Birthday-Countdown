@@ -240,6 +240,15 @@
         .music-player {
             margin-top: 1.5rem;
         }
+        
+        /* Song Lyrics */
+        .song-lyrics {
+            display: none;
+            margin-top: 1rem;
+            font-style: italic;
+            color: #ffb6c1;
+            font-size: 1.1rem;
+        }
     </style>
 </head>
 <body>
@@ -258,6 +267,12 @@
             <h2>🎉 Happy Birthday Myriam! 🎉</h2>
             <p>Today is your special day!</p>
             <div class="photo-frame" id="birthdayPhoto"></div>
+            <div class="song-lyrics" id="lyrics">
+                Happy Birthday to you<br>
+                Happy Birthday to you<br>
+                Happy Birthday dear Myriam<br>
+                Happy Birthday to you!
+            </div>
         </div>
         
         <div class="btn-container">
@@ -306,7 +321,8 @@
         </div>
         
         <div class="music-player">
-            <audio id="birthdaySong" controls>
+            <audio id="birthdaySong" controls loop>
+                <!-- Using a public domain Happy Birthday recording -->
                 <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
                 Your browser does not support the audio element.
             </audio>
@@ -342,6 +358,7 @@
                 document.getElementById("countdown").style.display = "none";
                 document.getElementById("message").style.display = "block";
                 document.getElementById("birthdayPhoto").style.display = "block";
+                document.getElementById("lyrics").style.display = "block";
                 
                 // Big confetti celebration
                 for(let i = 0; i < 15; i++) {
@@ -359,7 +376,7 @@
                 // Play birthday song
                 const song = document.getElementById("birthdaySong");
                 song.volume = 0.3;
-                song.play();
+                song.play().catch(e => console.log("Autoplay prevented:", e));
                 return;
             }
             
@@ -454,6 +471,12 @@
             // Replace with actual image URLs
             // document.getElementById("birthdayPhoto").style.backgroundImage = "url('images/myriam-birthday.jpg')";
             // document.querySelector("#specialMemory .photo-frame").style.backgroundImage = "url('images/our-memory.jpg')";
+            
+            // For a real Happy Birthday song, you would need to:
+            // 1. Record your own version (legal)
+            // 2. Use a licensed version
+            // 3. Or use a public domain alternative
+            // document.getElementById("birthdaySong").src = "path/to/your/happy-birthday.mp3";
         };
     </script>
 </body>
