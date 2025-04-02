@@ -22,7 +22,8 @@
             align-items: center;
             color: white;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            font-family: Arial, sans-serif;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            overflow: hidden;
         }
         
         .countdown-container {
@@ -31,56 +32,147 @@
             border-radius: 15px;
             text-align: center;
             max-width: 600px;
-            box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
-            border: 2px solid #ff69b4;
+            box-shadow: 0 0 30px rgba(255, 105, 180, 0.7);
+            border: 3px solid #ff69b4;
+            position: relative;
+            z-index: 10;
         }
         
         h1 {
             color: #ff69b4;
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             margin-bottom: 1.5rem;
-            text-shadow: 0 0 10px rgba(255, 105, 180, 0.7);
+            text-shadow: 0 0 15px rgba(255, 105, 180, 0.9);
         }
         
         #countdown {
             font-size: 1.8rem;
             margin: 1.5rem 0;
+            background: rgba(255, 182, 193, 0.2);
+            padding: 1rem;
+            border-radius: 10px;
         }
         
         #countdown span {
             color: #ff69b4;
             font-weight: bold;
-            font-size: 2rem;
+            font-size: 2.2rem;
         }
         
         #message h2 {
             color: #ff69b4;
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 1rem;
+            text-shadow: 0 0 20px rgba(255, 105, 180, 0.9);
         }
         
         .love-note {
             margin-top: 2rem;
             font-style: italic;
             color: #ffb6c1;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
+            background: rgba(255, 105, 180, 0.2);
+            padding: 0.8rem;
+            border-radius: 8px;
         }
         
         .heart {
-            color: red;
-            font-size: 1.5rem;
+            color: #ff1493;
+            font-size: 1.8rem;
             animation: pulse 1.5s infinite;
         }
         
         @keyframes pulse {
             0% { transform: scale(1); }
-            50% { transform: scale(1.3); }
+            50% { transform: scale(1.4); }
             100% { transform: scale(1); }
+        }
+        
+        /* Fun Facts Section */
+        .fun-facts {
+            display: none;
+            margin-top: 2rem;
+            padding: 1rem;
+            background: rgba(255, 182, 193, 0.3);
+            border-radius: 10px;
+            border-left: 4px solid #ff69b4;
+        }
+        
+        .fun-facts h3 {
+            color: #ff69b4;
+            margin-top: 0;
+        }
+        
+        .fun-facts ul {
+            text-align: left;
+            padding-left: 1.5rem;
+        }
+        
+        .fun-facts li {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Toggle Button */
+        .toggle-btn {
+            background: #ff69b4;
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            font-weight: bold;
+            margin-top: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 0 10px rgba(255, 105, 180, 0.7);
+        }
+        
+        .toggle-btn:hover {
+            background: #ff1493;
+            transform: scale(1.05);
+        }
+        
+        /* Balloons */
+        .balloon {
+            position: absolute;
+            width: 40px;
+            height: 50px;
+            border-radius: 50%;
+            opacity: 0.7;
+            z-index: 1;
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-100px) rotate(10deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+        
+        /* Close Button */
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 105, 180, 0.7);
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .close-btn:hover {
+            background: #ff1493;
+            transform: rotate(90deg);
         }
     </style>
 </head>
 <body>
     <div class="countdown-container">
+        <button class="close-btn" onclick="document.body.innerHTML = '<h1 style=color:#ff69b4;text-align:center;>I love you Myriam! ♥</h1>'">×</button>
         <h1>Countdown to Myriam's Birthday! <span class="heart">♥</span></h1>
         <div id="countdown">
             <span id="days"></span> Days<br>
@@ -92,11 +184,34 @@
             <h2>🎉 Happy Birthday Myriam! 🎉</h2>
             <p>Wishing you the most amazing day!</p>
         </div>
+        
+        <button class="toggle-btn" onclick="toggleFacts()">Show Fun Facts ❤️</button>
+        
+        <div class="fun-facts" id="funFacts">
+            <h3>Fun Facts About Myriam</h3>
+            <ul>
+                <li>She has the most beautiful smile in the world</li>
+                <li>Her laugh is absolutely contagious</li>
+                <li>She makes every day brighter</li>
+                <li>She's incredibly smart and talented</li>
+                <li>Her kindness touches everyone she meets</li>
+                <li>She's the love of my life ♥</li>
+            </ul>
+        </div>
+        
         <div class="love-note">
             Every second counts when I'm waiting to celebrate you<br>
             - Your love <span class="heart">♥</span>
         </div>
     </div>
+
+    <!-- Floating Balloons -->
+    <div class="balloon" style="background:#ff69b4; left:10%; top:80%;"></div>
+    <div class="balloon" style="background:#ff1493; left:20%; top:85%; animation-delay:1s;"></div>
+    <div class="balloon" style="background:#ffb6c1; left:30%; top:75%; animation-delay:2s;"></div>
+    <div class="balloon" style="background:#ff69b4; left:70%; top:80%; animation-delay:3s;"></div>
+    <div class="balloon" style="background:#ff1493; left:80%; top:85%; animation-delay:4s;"></div>
+    <div class="balloon" style="background:#ffb6c1; left:90%; top:75%; animation-delay:5s;"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script>
@@ -119,15 +234,15 @@
                 document.getElementById("countdown").style.display = "none";
                 document.getElementById("message").style.display = "block";
                 // Pink confetti celebration
-                for(let i = 0; i < 5; i++) {
+                for(let i = 0; i < 10; i++) {
                     setTimeout(() => {
                         confetti({
-                            particleCount: 150,
-                            spread: 70,
+                            particleCount: 200,
+                            spread: 100,
                             origin: { y: 0.6 },
                             colors: ['#ff69b4', '#ff1493', '#ffb6c1', '#ffffff']
                         });
-                    }, i * 300);
+                    }, i * 400);
                 }
                 return;
             }
@@ -143,9 +258,38 @@
             document.getElementById("seconds").textContent = seconds;
         }
         
-        // Update immediately and every second
+        // Toggle fun facts
+        function toggleFacts() {
+            const facts = document.getElementById("funFacts");
+            const btn = document.querySelector(".toggle-btn");
+            if (facts.style.display === "block") {
+                facts.style.display = "none";
+                btn.textContent = "Show Fun Facts ❤️";
+            } else {
+                facts.style.display = "block";
+                btn.textContent = "Hide Fun Facts ❤️";
+            }
+        }
+        
+        // Create more balloons dynamically
+        function createBalloons() {
+            const colors = ['#ff69b4', '#ff1493', '#ffb6c1', '#ff85a2', '#ff9eb5'];
+            for (let i = 0; i < 10; i++) {
+                const balloon = document.createElement("div");
+                balloon.className = "balloon";
+                balloon.style.background = colors[Math.floor(Math.random() * colors.length)];
+                balloon.style.left = Math.random() * 100 + "%";
+                balloon.style.top = Math.random() * 100 + "%";
+                balloon.style.animationDelay = Math.random() * 5 + "s";
+                balloon.style.transform = `scale(${Math.random() * 0.5 + 0.5})`;
+                document.body.appendChild(balloon);
+            }
+        }
+        
+        // Initialize
         updateCountdown();
         setInterval(updateCountdown, 1000);
+        createBalloons();
     </script>
 </body>
 </html>
