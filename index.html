@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Myriam's Birthday Countdown</title>
-    <link rel="icon" type="image/png" href="Images/myriams logo.png">
+    <link rel="icon" type="image/png" href="images/main logo 2.png">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Pacifico&display=swap');
         
         body {
-            background-image: url('Images/birthday-background.jpg');
+            background-image: url('images/Anorak wallpaper.png');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -157,6 +157,32 @@
             box-shadow: 0 0 20px rgba(255, 105, 180, 0.9);
         }
         
+        /* Party Button */
+        .party-btn {
+            background: linear-gradient(45deg, #ff1493, #ff69b4);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            font-weight: bold;
+            margin: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 0 15px rgba(255, 20, 147, 0.7);
+            font-size: 1.1rem;
+            animation: partyGlow 2s infinite;
+        }
+        
+        @keyframes partyGlow {
+            0% { box-shadow: 0 0 15px rgba(255, 20, 147, 0.7); }
+            50% { box-shadow: 0 0 30px rgba(255, 105, 180, 0.9); }
+            100% { box-shadow: 0 0 15px rgba(255, 20, 147, 0.7); }
+        }
+        
+        .party-btn:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
         .btn-container {
             display: flex;
             justify-content: center;
@@ -184,6 +210,22 @@
             0% { transform: translateY(0) rotate(0deg); }
             50% { transform: translateY(-150px) rotate(15deg); }
             100% { transform: translateY(0) rotate(0deg); }
+        }
+        
+        /* Party Mode Balloons */
+        .party-balloon {
+            position: absolute;
+            width: 40px;
+            height: 50px;
+            border-radius: 50%;
+            opacity: 0;
+            z-index: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
         }
         
         /* Photo Frame */
@@ -267,6 +309,7 @@
             <button class="toggle-btn" onclick="toggleSection('funFacts')">❤️ Fun Facts About You</button>
             <button class="toggle-btn" onclick="toggleSection('onThisDay')">🎂 On This Day</button>
             <button class="toggle-btn" onclick="toggleSection('specialMemory')">💖 Our Special Memory</button>
+            <button class="party-btn" onclick="startPartyMode()">🎊 Party Mode!</button>
         </div>
         
         <div class="fun-facts" id="funFacts">
@@ -397,6 +440,55 @@
                 // Show selected section
                 section.style.display = "block";
             }
+        }
+        
+        // Party Mode
+        function startPartyMode() {
+            // Create extra party balloons
+            const colors = ['#ff69b4', '#ff1493', '#ffb6c1', '#ff85a2', '#ff9eb5', '#ffffff'];
+            for (let i = 0; i < 20; i++) {
+                const balloon = document.createElement('div');
+                balloon.className = 'party-balloon';
+                balloon.style.background = colors[Math.floor(Math.random() * colors.length)];
+                balloon.style.left = Math.random() * 100 + '%';
+                balloon.style.top = Math.random() * 100 + '%';
+                balloon.style.opacity = '0.8';
+                balloon.style.animation = `float ${5 + Math.random() * 10}s ease-in-out infinite`;
+                balloon.style.animationDelay = Math.random() * 5 + 's';
+                balloon.textContent = ['♥', '★', '♪', '!', 'M', 'Y', 'B', 'D'][Math.floor(Math.random() * 8)];
+                document.body.appendChild(balloon);
+                
+                // Remove balloons after animation completes
+                setTimeout(() => {
+                    balloon.remove();
+                }, 15000);
+            }
+            
+            // Big confetti blast
+            for (let i = 0; i < 10; i++) {
+                setTimeout(() => {
+                    confetti({
+                        particleCount: 150,
+                        spread: 70,
+                        origin: { y: 0.6 },
+                        colors: ['#ff69b4', '#ff1493', '#ffb6c1', '#ffffff'],
+                        shapes: ['circle', 'heart']
+                    });
+                }, i * 300);
+            }
+            
+            // Make hearts pulse faster
+            const hearts = document.querySelectorAll('.heart');
+            hearts.forEach(heart => {
+                heart.style.animation = 'pulse 0.5s infinite';
+            });
+            
+            // Return to normal after 5 seconds
+            setTimeout(() => {
+                hearts.forEach(heart => {
+                    heart.style.animation = 'pulse 1.2s infinite';
+                });
+            }, 5000);
         }
         
         // Final love message
