@@ -239,6 +239,47 @@
         /* Music Player */
         .music-player {
             margin-top: 1.5rem;
+            display: none; /* Hidden by default, shows on birthday */
+        }
+        
+        /* Song Lyrics */
+        .song-lyrics {
+            display: none;
+            margin-top: 1rem;
+            font-style: italic;
+            color: #ffb6c1;
+            font-size: 1.3rem;
+            line-height: 1.8;
+            font-family: 'Dancing Script', cursive;
+        }
+        
+        /* Birthday Message */
+        .birthday-message {
+            display: none;
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: rgba(255, 105, 180, 0.2);
+            border-radius: 10px;
+            font-size: 1.2rem;
+        }
+        
+        /* Play Button */
+        .play-btn {
+            background: linear-gradient(45deg, #ff69b4, #ff1493);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            font-weight: bold;
+            margin: 1rem 0;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 0 15px rgba(255, 105, 180, 0.7);
+            font-size: 1.1rem;
+        }
+        
+        .play-btn:hover {
+            transform: scale(1.1);
         }
     </style>
 </head>
@@ -258,6 +299,23 @@
             <h2>🎉 Happy Birthday Myriam! 🎉</h2>
             <p>Today is your special day!</p>
             <div class="photo-frame" id="birthdayPhoto"></div>
+            <div class="song-lyrics" id="lyrics">
+                Happy Birthday to you<br>
+                Happy Birthday to you<br>
+                Happy Birthday dear Myriam<br>
+                Happy Birthday to you!
+            </div>
+            <div class="birthday-message">
+                Wishing you a day filled with love, laughter, and all the happiness you bring to others!
+            </div>
+            <button class="play-btn" onclick="playBirthdaySong()">Play Birthday Song ♫</button>
+            <div class="music-player">
+                <audio id="birthdaySong" loop>
+                    <!-- Using a reliable public domain birthday song -->
+                    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
         </div>
         
         <div class="btn-container">
@@ -304,13 +362,6 @@
             <br><br>
             - Your love <span class="heart">♥</span>
         </div>
-        
-        <div class="music-player">
-            <audio id="birthdaySong" controls>
-                <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-                Your browser does not support the audio element.
-            </audio>
-        </div>
     </div>
 
     <!-- Floating Elements -->
@@ -342,6 +393,8 @@
                 document.getElementById("countdown").style.display = "none";
                 document.getElementById("message").style.display = "block";
                 document.getElementById("birthdayPhoto").style.display = "block";
+                document.getElementById("lyrics").style.display = "block";
+                document.querySelector('.music-player').style.display = 'block';
                 
                 // Big confetti celebration
                 for(let i = 0; i < 15; i++) {
@@ -355,11 +408,6 @@
                         });
                     }, i * 300);
                 }
-                
-                // Play birthday song
-                const song = document.getElementById("birthdaySong");
-                song.volume = 0.3;
-                song.play();
                 return;
             }
             
@@ -372,6 +420,17 @@
             document.getElementById("hours").textContent = hours;
             document.getElementById("minutes").textContent = minutes;
             document.getElementById("seconds").textContent = seconds;
+        }
+        
+        // Play birthday song
+        function playBirthdaySong() {
+            const song = document.getElementById("birthdaySong");
+            song.volume = 0.3;
+            song.play().then(() => {
+                document.querySelector('.play-btn').style.display = 'none';
+            }).catch(error => {
+                alert("Please click 'Play Birthday Song' to start the music!");
+            });
         }
         
         // Toggle sections
