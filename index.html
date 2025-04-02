@@ -352,7 +352,7 @@
         
         <div class="music-player">
             <audio id="birthdaySong" controls>
-                <source src="https://www.musicpublicdomain.com/wp-content/uploads/2023/01/Happy-Birthday-To-You.mp3" type="audio/mpeg">
+                <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
                 Your browser does not support the audio element.
             </audio>
             <button class="toggle-btn" onclick="playSong()" style="margin-top: 1rem;">Play Birthday Song</button>
@@ -380,6 +380,10 @@
             targetDate.setFullYear(targetDate.getFullYear() + 1);
         }
         
+        // Audio element
+        const song = document.getElementById("birthdaySong");
+        song.volume = 0.3;
+
         function updateCountdown() {
             const now = new Date();
             const diff = targetDate - now;
@@ -403,7 +407,7 @@
                     }, i * 300);
                 }
                 
-                // Play birthday song automatically on birthday
+                // Attempt to play song on birthday
                 playSong();
                 return;
             }
@@ -436,15 +440,16 @@
         
         // Function to play the song
         function playSong() {
-            const song = document.getElementById("birthdaySong");
-            song.volume = 0.3;
             const playPromise = song.play();
-            
             if (playPromise !== undefined) {
-                playPromise.catch(error => {
-                    console.log("Autoplay prevented: ", error);
-                    // Song will still play if manually triggered via button
-                });
+                playPromise
+                    .then(() => {
+                        console.log("Song is playing!");
+                    })
+                    .catch(error => {
+                        console.log("Error playing song: ", error);
+                        alert("Please click the 'Play Birthday Song' button to start the music due to browser restrictions.");
+                    });
             }
         }
         
